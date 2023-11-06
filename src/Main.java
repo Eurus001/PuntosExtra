@@ -41,6 +41,7 @@ public class Main {
                     System.out.println("Cantidad vendida: ");
                     cantidad = Integer.parseInt(sc.next());
 
+                    inventario.venderProductos(producto,cantidad);
                     venta.realizarVenta(producto, cantidad, inventario.getProductos()[producto].precioFinal());
 
                     break;

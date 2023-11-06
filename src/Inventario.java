@@ -16,9 +16,14 @@ public class Inventario {
         productos[id].setCantidadActual(productos[id].getCantidadActual()+cantidad);
     }
 
+    public void venderProductos(int producto, int cantidad){
+        productos[producto].setCantidadActual(productos[producto].getCantidadActual()-cantidad);
+    };
+
     public Producto[] getProductos() {
         return productos;
     }
+
 
     public void modificarProducto(int producto, String nombre, int tipo, int cantidadActual, int cantidadMin, double precioBase){
         productos[producto].setNombre(nombre);

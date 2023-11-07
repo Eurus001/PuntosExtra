@@ -1,3 +1,7 @@
+import paquetedeinventario.Inventario;
+import paquetedeinventario.Producto;
+import paquetedeventa.Venta;
+
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
@@ -22,16 +26,10 @@ public class Main {
             switch (opc){
                 case 1:
 
-                    for(int i = 0; i < inventario.getProductos().length ; i++){
-                        System.out.println("Producto " + (i+1) + ":");
-                        System.out.println("Nombre: " + inventario.getProductos()[i].getNombre());
-                        System.out.println("Tipo: " + inventario.getProductos()[i].getTipo());
-                        System.out.println("Cantidad actual: " + inventario.getProductos()[i].getCantidadActual());
-                        System.out.println("Cantidad minima: " + inventario.getProductos()[i].getCantidadMin());
-                        System.out.println("Precio base: " + inventario.getProductos()[i].getPrecioBase());
-                        System.out.println("Precio venta final: " + inventario.getProductos()[i].precioFinal());
-                        System.out.println("-------------------------------------------------");
-                    }
+                    System.out.println("De que producto necesita la información (1-4): ");
+                    producto = Integer.parseInt(sc.next()) - 1;
+
+                    System.out.println(inventario.informacionDeProducto(producto));
 
                     break;
                 case 2:
@@ -56,19 +54,37 @@ public class Main {
 
                     break;
                 case 4:
+
                     String nombre;
-                    int tipo, cantidadActual, cantidadMin;
+                    int cantidadActual, cantidadMin;
                     double precioBase;
+                    Producto.TipoProducto tipo; // Cambiado de int a paquetedeinventario.Producto.TipoProducto
 
                     System.out.println("Ingrese el producto que desea modificar (1-4)");
                     producto = Integer.parseInt(sc.next()) - 1;
+                    sc.nextLine(); // Limpia el buffer del scanner después de leer un número
                     System.out.println("Ingrese el nuevo nombre del producto");
                     nombre = sc.nextLine();
-                    System.out.println("Ingrese el nuevo tipo del producto (0-2 (ver documentacion))");
-                    tipo = Integer.parseInt(sc.next());
+                    System.out.println("Ingrese el nuevo tipo del producto (0-Papelería, 1-Supermercado, 2-Droguería)");
+                    int tipoInt = Integer.parseInt(sc.next());
+
+                    switch (tipoInt) {
+                        case 0:
+                            tipo = Producto.TipoProducto.PAPELERIA;
+                            break;
+                        case 1:
+                            tipo = Producto.TipoProducto.SUPERMERCADO;
+                            break;
+                        case 2:
+                            tipo = Producto.TipoProducto.DROGUERIA;
+                            break;
+                        default:
+                            System.out.println("Tipo de producto no válido. Por favor ingrese un número entre 0 y 2.");
+                            continue;
+                    }
                     System.out.println("Ingrese la nueva cantidad en inventario");
                     cantidadActual = Integer.parseInt(sc.next());
-                    System.out.println("Ingrese la nueva cantidad minima de producto para solicitar inventario");
+                    System.out.println("Ingrese la nueva cantidad mínima de producto para solicitar inventario");
                     cantidadMin = Integer.parseInt(sc.next());
                     System.out.println("Ingrese el nuevo precio (recuerde usar . en lugar de ,)");
                     precioBase = Double.parseDouble(sc.next());
@@ -82,8 +98,8 @@ public class Main {
                     while (flag1 == 1){
 
                         System.out.println("Elija una opción");
-                        System.out.println("1. Producto más vendido");
-                        System.out.println("2. Producto menos vendido");
+                        System.out.println("1. paquetedeinventario.Producto más vendido");
+                        System.out.println("2. paquetedeinventario.Producto menos vendido");
                         System.out.println("3. Cantidad total de dinero recaudado por ventas");
                         System.out.println("4. Cantidad dinero recaudado por ventas de un producto");
                         System.out.println("5. Volver");

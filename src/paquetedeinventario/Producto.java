@@ -1,11 +1,19 @@
+package paquetedeinventario;
+
 public class Producto {
 
+    // Enum para los tipos de producto
+    public enum TipoProducto {
+        PAPELERIA, SUPERMERCADO, DROGUERIA
+    }
+
     private String nombre;
-    //Tipo de producto 0-papeleria, 1-supermercado, 2-drogueria
-    private int tipo, cantidadActual, cantidadMin;
+    private TipoProducto tipo; // Cambiado de int a TipoProducto
+    private int cantidadActual, cantidadMin;
     private double precioBase;
 
-    public Producto(String nombre, int tipo, int cantidadActual, int cantidadMin, double precioBase) {
+    // Actualizado el constructor para usar TipoProducto
+    public Producto(String nombre, TipoProducto tipo, int cantidadActual, int cantidadMin, double precioBase) {
         this.nombre = nombre;
         this.tipo = tipo;
         this.cantidadActual = cantidadActual;
@@ -17,15 +25,15 @@ public class Producto {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
+    void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public int getTipo() {
+    public TipoProducto getTipo() {
         return tipo;
     }
 
-    public void setTipo(int tipo) {
+    void setTipo(TipoProducto tipo) {
         this.tipo = tipo;
     }
 
@@ -33,7 +41,7 @@ public class Producto {
         return cantidadActual;
     }
 
-    public void setCantidadActual(int cantidadActual) {
+    void setCantidadActual(int cantidadActual) {
         this.cantidadActual = cantidadActual;
     }
 
@@ -41,7 +49,7 @@ public class Producto {
         return cantidadMin;
     }
 
-    public void setCantidadMin(int cantidadMin) {
+    void setCantidadMin(int cantidadMin) {
         this.cantidadMin = cantidadMin;
     }
 
@@ -49,20 +57,20 @@ public class Producto {
         return precioBase;
     }
 
-    public void setPrecioBase(double precioBase) {
+    void setPrecioBase(double precioBase) {
         this.precioBase = precioBase;
     }
 
-    public double precioFinal(){
-        switch (this.tipo){
-            case 0:
+    public double precioFinal() {
+        switch (this.tipo) {
+            case PAPELERIA:
                 return precioBase * 1.16;
-            case 1:
+            case SUPERMERCADO:
                 return precioBase * 1.04;
-            case 2:
+            case DROGUERIA:
                 return precioBase * 1.12;
             default:
-                return -1;
+                return -1; // Considerar lanzar una excepción o manejar el caso por defecto de manera adecuada
         }
     }
 }

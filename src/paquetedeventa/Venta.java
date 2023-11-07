@@ -1,3 +1,5 @@
+package paquetedeventa;
+
 public class Venta {
 
     private int[] cantidadVentas;
